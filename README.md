@@ -29,7 +29,7 @@ Finally, a report will be created that summarizes the analysis and helps prepare
 * 
 * 
 
-![Mentorship Eligibility Table](./Resources/membership_eligibility.png "Mentorship Eligibility")
+![Mentorship Eligibility Table](./Resources/mentorship_eligibility.png "Mentorship Eligibility")
 
 ## Summary
 
