@@ -11,14 +11,20 @@ Finally, a report will be created that summarizes the analysis and helps prepare
 
 ### Deliverable 1
 
-* 
-* 
-* 
+* In total, there are 72,458 retirees.
+* On average, retirees held 1.85 titles.
+* Retirees represented 7 unique retiring titles.
 * Of the retirees within the 7 unique retiring titles, over 70% have senior-level titles.
+
+#### Retirement Titles Table
 
 ![Retirement Titles Table](./Resources/retirement_titles.png "Retirement Titles")
 
+#### Unique Titles Table
+
 ![Unique Titles Table](./Resources/unique_titles.png "Unique Titles")
+
+#### Retiring Titles Table
 
 ![Retiring Titles Table](./Resources/retiring_titles.png "Retiring Titles")
 
