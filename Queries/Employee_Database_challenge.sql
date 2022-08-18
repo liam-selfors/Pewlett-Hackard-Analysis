@@ -1,18 +1,6 @@
--- Retrieve the emp_no, first_name, and last_name columns from the Employees table.
-SELECT e.emp_no,
-    e.first_name,
-    e.last_name
-FROM employees AS e;
+-- Deliverable 1
 
--- Retrieve the title, from_date, and to_date columns from the Titles table.
-SELECT t.title,
-    t.from_date,
-    t.to_date
-FROM titles AS t;
-
--- Drop retirement_titles before creation
 DROP TABLE retirement_titles;
-
 -- Retrieve the emp_no, first_name, and last_name columns from the Employees table.
 SELECT e.emp_no,
     e.first_name,
@@ -31,21 +19,58 @@ ON (e.emp_no = t.emp_no)
 WHERE (e.birth_date BETWEEN '1952-01-01' AND '1955-12-31')
 -- Then, order by the employee number.
 ORDER BY e.emp_no;
+-- Display result
+SELECT * FROM retirement_titles;
 
-DROP TABLE current_employees;
+
+DROP TABLE unique_titles;
 -- Use Dictinct with Orderby to remove duplicate rows
-SELECT DISTINCT ON (emp_no) emp_no,
-first_name,
-last_name,
-title
-INTO current_employees
-FROM retirement_titles
-WHERE to_date = '9999-01-01'
-ORDER BY emp_no, to_date DESC;
+SELECT DISTINCT ON (rt.emp_no)
+    rt.emp_no,
+    rt.first_name,
+    rt.last_name,
+    rt.title
+INTO unique_titles
+FROM retirement_titles as rt
+WHERE rt.to_date = '9999-01-01'
+ORDER BY rt.emp_no, rt.to_date DESC;
+-- Display result
+SELECT * FROM unique_titles;
 
--- Write another query to retrieve the number of employees by their most recent job title who are about to retire
-SELECT COUNT(ce.emp_no), ce.title
+
+DROP TABLE retiring_titles;
+-- Use Dictinct with Orderby to remove duplicate rows
+SELECT COUNT(ut.title), ut.title
 INTO retiring_titles
-FROM current_employees AS ce
-GROUP BY ce.title
-ORDER BY ce.count DESC;
+FROM unique_titles as ut
+GROUP BY ut.title
+ORDER BY ut.count DESC;
+-- Display result
+SELECT * FROM retiring_titles;
+
+
+-- Deliverable 2
+
+DROP TABLE mentorship_eligibility;
+-- Retrieve the emp_no, first_name, last_name, and birth_date columns from the Employees table
+SELECT DISTINCT ON (e.emp_no)
+    e.emp_no,
+    e.first_name,
+    e.last_name,
+    e.birth_date,
+-- Retrieve the from_date and to_date columns from the Department Employee table.
+    de.from_date,
+    de.to_date,
+-- Retrieve the title column from the Titles table.
+    t.title
+-- Create a new table using the INTO clause.
+INTO mentorship_eligibility
+FROM employees AS e
+INNER JOIN dept_emp AS de
+ON e.emp_no = de.emp_no
+INNER JOIN titles AS t
+ON e.emp_no = t.emp_no
+WHERE (de.to_date = '9999-01-01') AND (e.birth_date >= '1965-01-01') AND (e.birth_date <= '1965-12-01')
+ORDER BY e.emp_no;
+-- Display result
+SELECT * FROM mentorship_eligibility
