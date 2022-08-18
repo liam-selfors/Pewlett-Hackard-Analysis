@@ -14,13 +14,13 @@ Finally, a report will be created that summarizes the analysis and helps prepare
 * 
 * 
 * 
-* 
+* Of the retirees within the 7 unique retiring titles, over 70% have senior-level titles.
 
-![Retiring Titles Table](./Resources/retiring_titles.png "Retiring Titles")
+![Retirement Titles Table](./Resources/retirement_titles.png "Retirement Titles")
 
 ![Unique Titles Table](./Resources/unique_titles.png "Unique Titles")
 
-![Retirement Titles Table](./Resources/retirement_titles.png "Retirement Titles")
+![Retiring Titles Table](./Resources/retiring_titles.png "Retiring Titles")
 
 ### Deliverable 2
 
