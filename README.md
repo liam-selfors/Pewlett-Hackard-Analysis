@@ -80,4 +80,4 @@ INNER JOIN (
 ON m.dept_name = r.dept_name;`
 
 #### Ratio of retirees to mentees
-![Retiree to Mentee Ratios by Department](./Resources/retiree_to_mentee_ratio_by_department.png "Retiree to Mentee Ratios by Department")
+![Retiree to Mentee Ratios by Department](./Resources/retiree_to_mentee_ratios_by_department.png "Retiree to Mentee Ratios by Department")
