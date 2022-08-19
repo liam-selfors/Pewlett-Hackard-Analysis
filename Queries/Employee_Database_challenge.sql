@@ -73,4 +73,34 @@ ON e.emp_no = t.emp_no
 WHERE (de.to_date = '9999-01-01') AND (e.birth_date >= '1965-01-01') AND (e.birth_date <= '1965-12-31')
 ORDER BY e.emp_no;
 -- Display result
-SELECT * FROM mentorship_eligibility
+SELECT * FROM mentorship_eligibility;
+
+
+-- Find titles of eligible mentees
+SELECT me.title, COUNT(me.emp_no)
+INTO mentee_titles
+FROM mentorship_eligibility as me
+GROUP BY me.title;
+
+
+-- Find mentee and retiree counts by department
+SELECT m.dept_name, m.mentees, r.retirees, r.retirees/m.mentees AS retiree_to_mentee_ratio
+FROM (
+    SELECT d.dept_name, COUNT(de.emp_no) AS mentees
+    FROM dept_emp as de
+    INNER JOIN departments as d
+    ON de.dept_no = d.dept_no
+    INNER JOIN mentorship_eligibility as me
+    ON de.emp_no = me.emp_no
+    GROUP BY d.dept_name
+) AS m
+INNER JOIN (
+    SELECT d.dept_name, COUNT(de.emp_no) AS retirees
+    FROM dept_emp as de
+    INNER JOIN departments as d
+    ON de.dept_no = d.dept_no
+    INNER JOIN retirement_info as ri
+    ON de.emp_no = ri.emp_no
+    GROUP BY d.dept_name
+) AS r
+ON m.dept_name = r.dept_name;

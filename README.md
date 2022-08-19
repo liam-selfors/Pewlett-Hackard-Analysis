@@ -11,7 +11,7 @@ Finally, a report will be created that summarizes the analysis and helps prepare
 
 ### Deliverable 1
 
-* In total, there are 72,458 retirement-ready employees.
+* In total, there are 41,380 retirement-ready employees.
 * On average, retirement-ready employees held 1.85 titles throughout their careers.
 * Retirement-ready employees represented 7 unique retiring titles.
 * Of the retirement-ready employees within the 7 unique retiring titles, over 70% have senior-level titles.
@@ -31,9 +31,18 @@ Finally, a report will be created that summarizes the analysis and helps prepare
 ### Deliverable 2
 
 * There are 1,549 employees who are eligible for mentorship.
-* There are 46.78 times more retirees than mentorship-eligible employees.
-* 
-* 
+* There are 26.71 times more retirees than mentorship-eligible employees.
+* With the following query we can see that mentorship-eligible employees represent 6 titles
+
+`SELECT me.title, COUNT(me.emp_no)
+FROM mentorship_eligibility as me
+GROUP BY me.title;`
+
+* The most common title among mentorship-eligible employees is *Senior Staff*
+
+#### Mentee Counts by Title
+
+![Mentee Counts by Title Table](./Resources/mentee_titles.png "Mentee Counts by Title")
 
 #### Mentorship Eligibility Table
 
@@ -43,11 +52,11 @@ Finally, a report will be created that summarizes the analysis and helps prepare
 
 ### How many roles will need to be filled as the "silver tsunami" begins to make an impact?
 
-Retirement-ready employees make up 24.15% of the company's total number of employees. To maintain the same employee population, a maximum of 72,458 positions will need to be filled by 72,458 new hires. This number will be fewer if a smaller percent of retirement-ready employees decide to retire.
+Retirement-ready employees make up 13.8% of the company's total number of employees. To maintain the same employee population, a maximum of 41,380 positions will need to be filled by 41,380 new hires. This number will be fewer if a smaller percent of retirement-ready employees actually retire.
 
 ### Are there enough qualified, retirement-ready employees in the departments to mentor the next generation of Pewlett Hackard employees?
 
-There are 1,549 employees eligible for mentorship, and 72,458 retirement-ready employees. However, in order for each mentorship-eligible employee to have a qualified mentor within their own department, additional exploration is needed. Here we find the ratio of Retirement-ready employees to employees eligible for mentorship for each department:
+There are 1,549 employees eligible for mentorship, and 41,380 retirement-ready employees. However, in order for each mentorship-eligible employee to have a qualified mentor within their own department, additional exploration is needed. Here we find the ratio of Retirement-ready employees to employees eligible for mentorship for each department:
 
 `SELECT m.dept_name, m.mentees, r.retirees, r.retirees/m.mentees AS retiree_to_mentee_ratio
 FROM (
@@ -57,7 +66,6 @@ FROM (
     ON de.dept_no = d.dept_no
     INNER JOIN mentorship_eligibility as me
     ON de.emp_no = me.emp_no
-    WHERE me.to_date = '9999-01-01'
     GROUP BY d.dept_name
 ) AS m
 INNER JOIN (
